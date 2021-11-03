@@ -1,3 +1,58 @@
+:root {
+  --melon: #fbc2b5;
+  --peach: #FFA8A9;
+  --pink: #F786AA;
+  --magenta: #A14A76;
+  --silver: #CDB2AB;
+} 
+
+
 body {
-  background-color: blueviolet;
+  background-color: var(--magenta);
+  background-image: url('background.svg');
+  margin: 10rem 20%;
+  box-sizing: border-box;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--melon)
+}
+
+.clock {
+  border: 1rem solid var(--peach);
+  border-radius: 60%;
+  height: 20rem;
+  width: 20rem;
+  background-color: var(--melon);
+  position: relative;
+  z-index: -1;
+}
+
+.hand {
+  width: 10rem;
+  border: 0.5rem solid var(--pink);
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  border-radius: 0.5rem;
+  text-align: center;
+  z-index: 1;
+}
+
+.hand.hour {
+  width: 6rem;
+  left: 4rem;
+}
+
+.hand.minute {
+  width: 9rem;
+  left: 1rem;
+}
+
+.hand.second {
+  width: 8rem;
+  left: 2rem;
+  border-color: var(--silver);
+}
+
