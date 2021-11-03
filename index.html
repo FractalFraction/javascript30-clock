@@ -23,6 +23,43 @@
       </div>
     </div>
 
-    <!-- <script src="" async defer></script> -->
+    <script>
+      const hourHand = document.querySelector('div.hour')
+      const minuteHand = document.querySelector("div.minute")
+      const secondHand = document.querySelector("div.second")
+     
+      const currentDate = new Date()
+      const initialSeconds = currentDate.getSeconds()
+      const initialMinutes = currentDate.getMinutes()
+      const initialHour = currentDate.getHours()
+
+      const intervals = {second: 1000, minute: 60000, hour: 360000}
+
+      // Set the initial transform property
+      hourHand.style.transform = `rotate(${90 + initialHour * 30 + initialMinutes * 0.5}deg)`
+      minuteHand.style.transform = `rotate(${90 + initialMinutes * 6}deg)`
+      secondHand.style.transform = `rotate(${90 + initialSeconds * 6}deg)`
+
+      // Update the position of the second hand on the clock
+      secondsElapsed = 0;
+      setInterval(() => {
+        secondsElapsed += 1
+        currentSeconds = (initialSeconds + secondsElapsed)%60
+        secondHand.style.transform = `rotate(${90 + currentSeconds * 6}deg)`
+      }, intervals.second)
+
+      // Update the position of the minute hand on the clock
+      minutesElapsed = 0;
+      hoursElapsed = 0;
+      setInterval(() => {
+        minutesElapsed += 1
+        currentMinutes = (initialMinutes + minutesElapsed)%60
+        currentHours = (initialHour + hoursElapsed)%12
+        minuteHand.style.transform = `rotate(${90 + currentMinutes*6}deg)`
+        hourHand.style.transform = `rotate(${90 + currentHours*30 + currentMinutes*0.5}deg)`
+      }, intervals.minute)
+
+
+    </script>
   </body>
 </html>
