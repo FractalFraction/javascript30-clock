@@ -55,7 +55,7 @@
       function rotateBoth(handOne,handTwo, n, m){
           return function(){
           current.minutes = (current.minutes + 1)%60
-          current.hours = (current.hours + elapsed.hours)%12
+          current.hours = (current.hours + 1)%12
           handOne.style.transform = `rotate(${90 + current.minutes*n}deg)`
           handTwo.style.transform = `rotate(${90 + current.hours*30 + current.minutes*m}deg)`
         }
