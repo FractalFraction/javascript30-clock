@@ -34,6 +34,9 @@
       const initialHour = currentDate.getHours()
 
       const intervals = {second: 1000, minute: 60000, hour: 360000}
+      const current = {seconds: currentDate.getSeconds(), 
+                       minutes: currentDate.getMinutes(),
+                       hours: currentDate.getHours()}
 
       // Handler Functions
       function setInitialHandPositions(hourHand, minuteHand, secondHand){
@@ -44,40 +47,27 @@
 
       function rotateOnly(hand, n){
         return function(){
-          secondsElapsed += 1
-          currentSeconds = (initialSeconds + secondsElapsed)%60
-          hand.style.transform = `rotate(${90 + currentSeconds * n}deg)`
+          current.seconds = (current.seconds + 1)%60
+          hand.style.transform = `rotate(${90 + current.seconds * n}deg)`
         }
       }
 
       function rotateBoth(handOne,handTwo, n, m){
           return function(){
-          minutesElapsed += 1
-          currentMinutes = (initialMinutes + minutesElapsed)%60
-          currentHours = (initialHour + hoursElapsed)%12
-          handOne.style.transform = `rotate(${90 + currentMinutes*n}deg)`
-          handTwo.style.transform = `rotate(${90 + currentHours*30 + currentMinutes*m}deg)`
+          current.minutes = (current.minutes + 1)%60
+          current.hours = (current.hours + elapsed.hours)%12
+          handOne.style.transform = `rotate(${90 + current.minutes*n}deg)`
+          handTwo.style.transform = `rotate(${90 + current.hours*30 + current.minutes*m}deg)`
         }
       }
 
       setInitialHandPositions(hourHand,minuteHand,secondHand)
-
-      // Set the initial transform property
+      // Hand position call back functions
       const secondHandRotator = rotateOnly(secondHand,6)
       const minuteAndHourHandRotator = rotateBoth(minuteHand, hourHand, 6, 0.5)
-
-      // Update the position of the second hand on the clock
-      secondsElapsed = 0;
+      // Update the hand positions
       setInterval(secondHandRotator, intervals.second)
-
-      // Update the position of the minute hand on the clock
-      minutesElapsed = 0;
-      hoursElapsed = 0;
       setInterval(minuteAndHourHandRotator, intervals.minute)
-
-      setInterval(() => {
-        hoursElapsed += 1
-      }, intervals.hour)
 
     </script>
   </body>
